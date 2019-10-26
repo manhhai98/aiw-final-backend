@@ -3,9 +3,9 @@
 include_once dirname(__DIR__, 1) . '/repo/NewsRepository.php';
 include_once dirname(__DIR__, 1) . '/utils/validator-utils.php';
 
-class TagController
+class NewsController
 {
-    const TAG_URI_PATH = "news";
+    const NEWS_URI_PATH = "news";
 
     private $requestMethod;
     private $newsId;
@@ -41,7 +41,7 @@ class TagController
                 // TODO: add patch operations
                 break;
             case 'DELETE':
-                $this->newsRepository->deleteNews($this->newsId);
+                $this->newsRepository->deleteTag($this->newsId);
                 break;
             default:
                 $this->invalidMethod();
@@ -54,22 +54,22 @@ class TagController
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         $news = new News();
         $news->fromAssocArray($input);
-        return $tag;
+        return $news;
     }
 
     private function validateNews(News $news)
     {
-        $newsTitle = $news->getTitle();
+        $newsName = $news->getName();
         $hasError = false;
         $validateErrorMessage = "";
-        if (empty($newsTitle)) { 
+        if (empty($tagName)) { 
             $hasError = true;
-            $validateErrorMessage = "News title must not be empty";
+            $validateErrorMessage = "Tag name must not be empty";
         }
-        //if (strlen($tagName) > 255) { 
-        //    $hasError = true;
-        //    $validateErrorMessage = "Tag name must not exceed 255 characters";
-        //}
+        if (strlen($tagName) > 255) { 
+            $hasError = true;
+            $validateErrorMessage = "Tag name must not exceed 255 characters";
+        }
         // Uncommented due to error
         // if (ValidatorUtils::hasSpecialChars($tagName)) {
         //     $hasError = true;

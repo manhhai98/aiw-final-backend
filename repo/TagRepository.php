@@ -8,7 +8,7 @@ require_once './repo/BaseRepository.php';
 
 class TagRepository implements BaseRepository
 {
-    const TAG_TBL_NAME = "tagsss";
+    const TAG_TBL_NAME = "tags";
 
     public function getAll()
     {

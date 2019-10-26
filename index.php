@@ -6,7 +6,6 @@ include_once './controller/TagController.php';
 include_once './repo/CateRepository.php';
 include_once './controller/CateController.php';
 
-
 function __main__()
 {
     // get uri and request method
@@ -43,12 +42,21 @@ function handlePath($uri, $requestMethod)
     }
 }
 
+//function isPathValid($path) {
+//    $validPaths = [TagController::TAG_URI_PATH];
+ //   if (in_array($path, $validPaths)) return true;
+//    else return false;
+//}
+
 function isPathValid($path) {
-    $validPaths = [TagController::TAG_URI_PATH] = [CateController::CATE_URI_PATH];
+    $validPaths = [TagController::TAG_URI_PATH]
     if (in_array($path, $validPaths)) return true;
     else return false;
-}
 
+    $validPaths1 = [CateController::CATE_URI_PATH];
+    if (in_array($path, $validPaths1)) return true;
+    else return false;
+}
 
 /**
  * initialize main function
